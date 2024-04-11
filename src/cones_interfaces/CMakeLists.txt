@@ -17,7 +17,6 @@ find_package(builtin_interfaces REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/BoundingBox.msg"
   "msg/Cones.msg"
   DEPENDENCIES std_msgs geometry_msgs builtin_interfaces
  )
