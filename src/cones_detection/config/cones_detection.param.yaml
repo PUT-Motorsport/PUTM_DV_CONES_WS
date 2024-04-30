@@ -2,7 +2,6 @@
   ros__parameters:
     build_engine: false
     show_image: true
-    model_path: "/home/gasyna/cones_ws/src/cones_detection/src/best_nano.onnx"
-    engine_path: "/home/gasyna/cones_ws/src/cones_detection/src/best_nano.engine"
-    svo_path: "/home/gasyna/zed_tests/test_rektorat_v1_7-14.svo"
-    # '/home/gasyna/zed_tests/test_rektorat_v1_7-14.svo'
+    model_path: "src/cones_detection/src/best_nano.onnx"
+    engine_path: "src/cones_detection/src/best_nano.engine"
+    svo_path: "src/cones_detection/src/test_rektorat_v1_7-14.svo"

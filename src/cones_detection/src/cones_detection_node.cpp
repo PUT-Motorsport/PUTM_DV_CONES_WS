@@ -14,7 +14,7 @@
 
 #include "cones_detection/cones_detection_node.hpp"
 #include <sensor_msgs/msg/image.hpp>
-
+#include <filesystem>
 #include "std_msgs/msg/header.hpp"
 
 #define NMS_THRESH 0.4
@@ -72,13 +72,18 @@ ConesDetectionNode::ConesDetectionNode(const rclcpp::NodeOptions & options)
 
   setenv("CUDA_MODULE_LOADING", "LAZY", 1);
 
+
+  if (!std::filesystem::exists(engine_path))
+  {
+    build_engine = true;
+  }
+
   if (build_engine)
   {
     OptimDim dyn_dim_profile;
     Yolo::build_engine(onnx_path, engine_path, dyn_dim_profile);
     std::cout << "Build finished" << std::endl;
   }
-
 
   inference();
 }
@@ -186,9 +191,10 @@ int ConesDetectionNode::inference()
             sensor_msgs::msg::Image::SharedPtr msg_out = cv_bridge::CvImage(header, "bgr8", left_cv).toImageMsg();
             image_pub_->publish(*msg_out);
             }
-            // cv::imshow("camera", left_cv);
-            // cv::waitKey();
+
             // Retrieve the tracked objects, with 2D and 3D attributes
+
+
             zed.retrieveObjects(objects, objectTracker_parameters_rt);
 
             auto end_time = std::chrono::high_resolution_clock::now();
