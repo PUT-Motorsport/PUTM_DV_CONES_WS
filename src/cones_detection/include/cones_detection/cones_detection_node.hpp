@@ -40,7 +40,7 @@ private:
   std::string svo_path{""};
 
   void imageCallback(const sensor_msgs::msg::Image::SharedPtr msg);
-  int inference();
+  void inference();
 
   rclcpp::Publisher<cones_interfaces::msg::Cones>::SharedPtr cones_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr image_pub_;

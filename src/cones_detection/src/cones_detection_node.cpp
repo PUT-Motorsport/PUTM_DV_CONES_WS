@@ -88,7 +88,7 @@ ConesDetectionNode::ConesDetectionNode(const rclcpp::NodeOptions & options)
   inference();
 }
 
-int ConesDetectionNode::inference()
+void ConesDetectionNode::inference()
 {
   sl::Camera zed;
   sl::InitParameters init_parameters;
@@ -105,7 +105,7 @@ int ConesDetectionNode::inference()
   auto returned_state = zed.open(init_parameters);
   if (returned_state != sl::ERROR_CODE::SUCCESS) {
       print("Camera Open", returned_state, "Exit program.");
-      return EXIT_FAILURE;
+      // return EXIT_FAILURE;
   }
 
 
@@ -120,7 +120,7 @@ int ConesDetectionNode::inference()
   if (returned_state != sl::ERROR_CODE::SUCCESS) {
       print("enableObjectDetection", returned_state, "\nExit program.");
       zed.close();
-      return EXIT_FAILURE;
+      // return EXIT_FAILURE;
   }
 
   auto camera_config = zed.getCameraInformation().camera_configuration;
